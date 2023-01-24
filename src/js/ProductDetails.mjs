@@ -31,7 +31,7 @@ export default class ProductDetails {
 
 
         const productImage = document.getElementById('productImage');
-        productImage.setAttribute('src', product.Image);
+        productImage.setAttribute('src', product.Images.PrimaryLarge);
         productImage.setAttribute('alt', product.Name);
         document.getElementsByClassName('product-card__price')[0].innerHTML = product.FinalPrice;
         document.getElementsByClassName('product__color')[0].innerHTML = product.Colors[0].ColorName;
