@@ -2,8 +2,8 @@ import { renderListWithTemplate } from "./utils.mjs"
 
 function productCardTemplate(product) {
     return `<li class="product-card">
-      <a href="product_pages/index.html?product=${product.Id}">
-        <img src="${product.Image}" alt="${product.Name}">
+      <a href="../product_pages/index.html?product=${product.Id}">
+        <img src="${product.Images.PrimaryMedium}" alt="${product.Name}">
         <h3 class="card__brand">${product.Id}</h3>
         <h2 class="card__name">${product.Brand.Name}</h2>
         <p class="product-card__price">$${product.FinalPrice}</p>
@@ -22,8 +22,9 @@ export default class ProductListing {
 
     async init() {
       // our dataSource will return a Promise...so we can use await to resolve it.
-      const list = await this.dataSource.getData();
+      const list = await this.dataSource.getData(this.category);
       this.renderList(list);
+      document.querySelector("#product-category").innerHTML = "Top Products: " + this.category;
     }
 
     renderList(list) {
