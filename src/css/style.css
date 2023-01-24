@@ -222,6 +222,7 @@ footer {
 }
 
 
+<<<<<<< HEAD
 .grid-container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -260,6 +261,8 @@ footer {
 }
 
 
+=======
+>>>>>>> 4a02da9 (Fixing bugs)
 .grid-container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
