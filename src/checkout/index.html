@@ -1,26 +1,87 @@
 <!DOCTYPE html>
 
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+  <meta charset="UTF-8" />
 
-    <title>Sleep Outside | Checkout</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="/css/style.css" />
-    <script src="../js/checkout.js" type="module"></script>
-  </head>
+  <title>Sleep Outside | Checkout</title>
 
-  <body>
-    <header id="mainHeader" class="divider"></header>
+  <link rel="stylesheet" href="/css/style.css" />
+  <script src="../js/checkout.js" type="module"></script>
+</head>
 
-    <main class="divider">
-      <section class="products">
-        <h2>Review & Place your Order</h2>
-      </section>
-    </main>
+<body>
+  <header id="mainHeader" class="divider"></header>
 
-    <footer id="mainFooter"></footer>
-  </body>
+  <main class="divider">
+    <section class="products">
+      <form>
+        <h3>Customer Information</h3>
+        <div>
+          <label for="first-name">First Name:</label>
+          <input type="text" id="first-name" required>
+        </div>
+        <div>
+          <label for="last-name">Last Name:</label>
+          <input type="text" id="last-name" required>
+        </div>
+        <div>
+          <label for="street-address">Street Address:</label>
+          <input type="text" id="street-address" required>
+        </div>
+        <div>
+          <label for="city">City:</label>
+          <input type="text" id="city" required>
+        </div>
+        <div>
+          <label for="state">State:</label>
+          <input type="text" id="state" required>
+        </div>
+        <div>
+          <label for="zip-code">Zip Code:</label>
+          <input type="text" id="zip-code" required>
+        </div>
+        <h3>Payment Information</h3>
+        <div>
+          <label for="credit-card">Credit Card Number:</label>
+          <input type="text" id="credit-card" required>
+        </div>
+        <div>
+          <label for="expiration-date">Expiration Date:</label>
+          <input type="text" id="expiration-date" required>
+        </div>
+        <div>
+          <label for="security-code">Security Code:</label>
+          <input type="text" id="security-code" required>
+        </div>
+        <h3>Order Summary</h3>
+        <table>
+          <tr>
+            <td>Subtotal:</td>
+            <td>$0.00</td>
+          </tr>
+          <tr>
+            <td>Shipping Estimate:</td>
+            <td>$0.00</td>
+          </tr>
+          <tr>
+            <td>Tax:</td>
+            <td>$0.00</td>
+          </tr>
+          <tr>
+            <td><b>Order Total:</b></td>
+            <td><b>$0.00</b></td>
+          </tr>
+        </table>
+        <input type="submit" value="Checkout">
+      </form>
+    </section>
+  </main>
+
+  <footer id="mainFooter"></footer>
+</body>
+
 </html>
