@@ -1,4 +1,7 @@
 import { getLocalStorage } from "./utils.mjs";
+import ExternalServices from "./ExternalServices.mjs";
+
+const externalServices = new ExternalServices();
 
 export default class CheckoutProcess {
     constructor(key, outputSelector) {
@@ -19,17 +22,20 @@ export default class CheckoutProcess {
     calculateItemSummary() {
       // calculate and display the total amount of the items in the cart, and the number of items.
       const itemSumary = document.querySelector(
-        this.outputSelector + " #subtotal"
+        this.outputSelector + "#subtotal"
       );
       const itemNumElement = document.querySelector(
-        this.outputSelector + " #num-items"
+        this.outputSelector + "#num-items"
       );
 
       itemNumElement.innerHTML = this.list.length;
 
-      this.itemTotal = this.list.map((item) => item.FinalPrice)
-                                .reduce((sum, item) => sum + item);
-      itemSumary.innerText = "$" + this.itemTotal;
+      let finalPrices = this.list.map(function(item) {
+        const object = JSON.parse(item)
+        return object.FinalPrice;
+      });
+      this.itemTotal = finalPrices.reduce((sum, item) => sum + item);
+      itemSumary.innerHTML = "$" + this.itemTotal;
 
       this.calculateOrdertotal();
     }
@@ -51,10 +57,39 @@ export default class CheckoutProcess {
       document.querySelector("#shipping").innerHTML = "$" + this.shipping;
     }
 
-    async checkout(form) {
+    async checkout() {
         // build the data object from the calculated fields, the items in the cart, and the information entered into the form
-    
+        const form = document.forms["checkout"];
+
+        const json = formDataToJSON(form);
+
+        json.orderTotal = this.orderTotal;
+        json.tax = this.tax;
+        json.shipping = this.shipping;
+        json.items = packageItems(this.list)
+        json.orderDate = new Date();
+
+        console.log(json);
+
+        try {
+          const res = await externalServices.postData(json);
+
+          this.cleanCheckoutForm(form);
+          console.log(res);
+        } catch (err) {
+          console.log(err);
+        }
         // call the checkout method in our ExternalServices module and send it our data object.
+      }
+
+      cleanCheckoutForm(form) {
+        window.alert("The order was placed")
+        document.querySelector("#orderTotal").innerHTML = "$";
+        document.querySelector("#tax").innerHTML = "$";
+        document.querySelector("#shipping").innerHTML = "$";
+        document.querySelector("#subtotal").innerHTML = "$";
+        document.querySelector("#num-items").innerHTML = "";
+        form.reset();
       }
     
   }
@@ -62,5 +97,27 @@ export default class CheckoutProcess {
   // takes the items currently stored in the cart (localstorage) and returns them in a simplified form.
   function packageItems(items) {
     // convert the list of products from localStorage to the simpler form required for the checkout process. Array.map would be perfect for this.
-  
+    const simplifiedItems = items.map((item) => {
+      return {
+        id: item.Id,
+        price: item.FinalPrice,
+        name: item.Name,
+        quantity: 1,
+      };
+    });
+    return simplifiedItems;
   }
+
+  // takes a form element and returns an object where the key is the "name" of the form input.
+function formDataToJSON(formElement) {
+  const formData = new FormData(formElement),
+    convertedJSON = {};
+
+    console.log(formData);
+
+  formData.forEach(function (value, key) {
+    convertedJSON[key] = value;
+  });
+
+  return convertedJSON;
+}
