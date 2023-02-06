@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      .banner {
+        height: 50px;
+        background-color: yellow;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 1em;
+        box-sizing: border-box;
+        width: 100%;
+      }
+      .banner p {
+        margin: 0;
+      }
+      .close-btn {
+        cursor: pointer;
+        font-size: 1.5em;
+        color: gray;
+      }
+      @media only screen and (max-width: 600px) {
+        .banner {
+          height: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="banner">
+      <p>This is a banner message</p>
+      <span class="close-btn">&times;</span>
+    </div>
+    <div class="banner">
+        <p>This is a banner message</p>
+        <span class="close-btn">&times;</span>
+      </div>
+
+    <script>
+      const closeBtn = document.querySelector(".close-btn");
+      closeBtn.addEventListener("click", function () {
+        document.querySelector(".banner").style.display = "none";
+      });
+    </script>
+
+    <!-- rest of the page content goes here -->
+  </body>
+</html>

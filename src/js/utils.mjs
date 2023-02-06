@@ -5,6 +5,10 @@ export function qs(selector, parent = document) {
 // or a more concise version if you are into that sort of thing:
 // export const qs = (selector, parent = document) => parent.querySelector(selector);
 
+export function removeLocalStorage(key) {
+  localStorage.removeItem(key);
+}
+
 // retrieve data from localstorage
 export function getLocalStorage(key) {
   return JSON.parse(localStorage.getItem(key));
@@ -75,4 +79,33 @@ function convertToText(res) {
   } else {
     throw new Error("Bad Response");
   }
+}
+
+export function alertMessage(message, scroll = true) {
+  // create element to hold our alert
+  const alert = document.createElement('div');
+  // add a class to style the alert
+  alert.classList.add('alert');
+  // set the contents. You should have a message and an X or something the user can click on to remove
+  const messageAlert = document.createElement('p');
+  messageAlert.innerHTML = message;
+  const buttomAlert = document.createElement('span');
+  buttomAlert.innerHTML = "&times;";
+  buttomAlert.classList.add("close-btn");
+
+  alert.appendChild(messageAlert);
+  alert.appendChild(buttomAlert);
+
+  // add a listener to the alert to see if they clicked on the X
+  // if they did then remove the child
+  buttomAlert.addEventListener('click', function(e) {
+      main.removeChild(alert);
+  });
+  // add the alert to the top of main
+  const main = document.querySelector('main');
+  main.prepend(alert);
+  // make sure they see the alert by scrolling to the top of the window
+  //we may not always want to do this...so default to scroll=true, but allow it to be passed in and overridden.
+  if(scroll)
+    window.scrollTo(0,0);
 }
