@@ -1,4 +1,4 @@
-import { getLocalStorage } from "./utils.mjs";
+import { getLocalStorage, removeLocalStorage, alertMessage } from "./utils.mjs";
 import ExternalServices from "./ExternalServices.mjs";
 
 const externalServices = new ExternalServices();
@@ -22,10 +22,10 @@ export default class CheckoutProcess {
     calculateItemSummary() {
       // calculate and display the total amount of the items in the cart, and the number of items.
       const itemSumary = document.querySelector(
-        this.outputSelector + "#subtotal"
+        this.outputSelector + " #subtotal"
       );
       const itemNumElement = document.querySelector(
-        this.outputSelector + "#num-items"
+        this.outputSelector + " #num-items"
       );
 
       itemNumElement.innerHTML = this.list.length;
@@ -70,26 +70,19 @@ export default class CheckoutProcess {
         json.orderDate = new Date();
 
         console.log(json);
-
+        
         try {
           const res = await externalServices.postData(json);
 
-          this.cleanCheckoutForm(form);
+          removeLocalStorage(this.key);
+          form.reset();
+          window.location.href = "success.html"
           console.log(res);
         } catch (err) {
+          alertMessage("Erro trying to submit the order");
           console.log(err);
         }
         // call the checkout method in our ExternalServices module and send it our data object.
-      }
-
-      cleanCheckoutForm(form) {
-        window.alert("The order was placed")
-        document.querySelector("#orderTotal").innerHTML = "$";
-        document.querySelector("#tax").innerHTML = "$";
-        document.querySelector("#shipping").innerHTML = "$";
-        document.querySelector("#subtotal").innerHTML = "$";
-        document.querySelector("#num-items").innerHTML = "";
-        form.reset();
       }
     
   }

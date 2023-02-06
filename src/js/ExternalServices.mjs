@@ -1,9 +1,15 @@
+import { alertMessage } from "./utils.mjs"
+
 const baseURL = 'http://server-nodejs.cit.byui.edu:3000/'
 
-function convertToJson(res) {
+async function convertToJson(res) {
   if (res.ok) {
     return res.json();
   } else {
+    const json = await res.json();
+    Object.keys(json).forEach(function(key) {
+      alertMessage(json[key]);
+    });
     throw new Error("Bad Response");
   }
 }

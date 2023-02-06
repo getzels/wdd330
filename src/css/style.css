@@ -347,3 +347,38 @@ footer {
 .order-summary b {
   font-size: larger;
 }
+
+.successMessage p {
+  font-size: 1.5em;
+  color: green;
+  text-align: center;
+}
+
+
+.alert {
+  height: 50px;
+  background-color: rgb(255, 153, 0);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1em;
+  box-sizing: border-box;
+  width: 100%;
+  margin-bottom: 1px;
+}
+
+.alert p {
+  margin: 0;
+}
+
+.close-btn {
+  cursor: pointer;
+  font-size: 1.5em;
+  color: gray;
+}
+
+@media only screen and (max-width: 600px) {
+  .alert {
+    height: auto;
+  }
+}
