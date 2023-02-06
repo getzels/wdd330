@@ -277,3 +277,73 @@ footer {
   height: 80px;
   object-fit: contain;
 }
+
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.grid-item {
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  padding: 20px;
+  text-align: center;
+}
+
+.grid-item img {
+  width: 70px;
+  height: 80px;
+  object-fit: contain;
+}
+
+#checkout-form {
+  width: 500px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+#checkout-form h3 {
+  margin-top: 20px;
+}
+
+#checkout-form div {
+  margin-bottom: 10px;
+}
+
+#checkout-form label {
+  display: inline-block;
+  width: 150px;
+}
+
+#checkout-form input[type="text"] {
+  width: 300px;
+  padding: 5px;
+  border: 1px solid gray;
+  border-radius: 5px;
+}
+
+#checkout-form input[type="submit"] {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.order-summary {
+  margin-top: 20px;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.order-summary td {
+  padding: 10px;
+  border: 1px solid gray;
+}
+
+.order-summary b {
+  font-size: larger;
+}
